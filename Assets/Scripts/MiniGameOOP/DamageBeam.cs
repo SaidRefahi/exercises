@@ -2,19 +2,18 @@ using UnityEngine;
 
 public class DamageBeam : Ability
 {
-    public DamageBeam(float amount) : base("Rayo Dañino", amount, TargetType.Enemigo) { }
+    public DamageBeam(float amount) : base("Damage Beam", amount, TargetType.Enemy) { }
 
     public override void Execute(Entity target)
     {
         if (target.GetTargetType() == targetAllowed)
-            target.ModifyHealth(-power); // Resta vida
+            target.ModifyHealth(-power);
         else
-            Debug.LogWarning("¡Ese rayo lastima a los tuyos!");
+            Debug.LogWarning("This beam hurts your allies!");
     }
 
-    // Sobrescribimos la virtual para darle un toque distinto
     public override string GetDescription()
     {
-        return base.GetDescription() + " (Mortal)";
+        return base.GetDescription() + " (Deadly)";
     }
 }

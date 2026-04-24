@@ -5,14 +5,14 @@ using UnityEngine.InputSystem;
 
 public class AttendanceMiniGame : MonoBehaviour
 {
-    [Header("Configuración")]
+    [Header("Settings")]
     public int totalStudents = 10;
     
     private GameObject[] students;
     private bool[] attendance;
-    private int totalRealesAsistieron = 0;
+    private int totalActualAttended = 0;
 
-    [Header("Estado del Juego")]
+    [Header("Game State")]
     private bool isGuessingPhase = false;
     private float guessTimer = 0f;
     private int currentGuesses = 0;
@@ -27,12 +27,12 @@ public class AttendanceMiniGame : MonoBehaviour
     {
         students = new GameObject[totalStudents];
         attendance = new bool[totalStudents];
-        totalRealesAsistieron = 0;
+        totalActualAttended = 0;
 
         for (int i = 0; i < totalStudents; i++)
         {
             GameObject student = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            student.name = "Estudiante_" + i;
+            student.name = "Student_" + i;
             
             float xOffset = (i - (totalStudents / 2f)) * 1.5f;
             student.transform.position = new Vector3(xOffset, 0, 0);
@@ -41,28 +41,26 @@ public class AttendanceMiniGame : MonoBehaviour
             students[i] = student;
 
             attendance[i] = Random.value > 0.5f;
-            if (attendance[i]) totalRealesAsistieron++;
+            if (attendance[i]) totalActualAttended++;
         }
     }
 
     IEnumerator GameSequence()
     {
-        Debug.Log("Iniciando revisión recursiva...");
+        Debug.Log("Starting recursive check...");
         yield return new WaitForSeconds(1f);
 
-        // Llama a la recursión
         yield return StartCoroutine(CheckAttendanceRecursive(0));
 
         yield return new WaitForSeconds(1f);
 
-        // Todo se apaga
         foreach (var student in students)
         {
             student.GetComponent<Renderer>().material.color = Color.grey;
         }
 
-        Debug.Log("============= ¡A ADIVINAR! =============");
-        Debug.Log("Tienes 5 SEGUNDOS. Presiona ESPACIO por cada alumno que asistió.");
+        Debug.Log("============= TIME TO GUESS! =============");
+        Debug.Log("You have 5 SECONDS. Press SPACE for each student that attended.");
         
         currentGuesses = 0;
         guessTimer = 5f;
@@ -99,7 +97,6 @@ public class AttendanceMiniGame : MonoBehaviour
                 }
             }
 
-            // ¿Se terminaron los 5 segundos?
             if (guessTimer <= 0)
             {
                 isGuessingPhase = false;
@@ -110,25 +107,24 @@ public class AttendanceMiniGame : MonoBehaviour
 
     void CheckResult()
     {
-        Debug.Log("============= ¡TIEMPO AGOTADO! =============");
+        Debug.Log("============= TIME IS UP! =============");
         
-        if (currentGuesses == totalRealesAsistieron)
+        if (currentGuesses == totalActualAttended)
         {
-            Debug.Log($"¡MAGNÍFICO, GANASTE! Contaste {currentGuesses} alumnos y la asistencia real fue {totalRealesAsistieron}.");
-            StartCoroutine(FlashCubes(Color.green)); // Parpadear Verde
+            Debug.Log($"MAGNIFICENT, YOU WON! You counted {currentGuesses} students and the actual attendance was {totalActualAttended}.");
+            StartCoroutine(FlashCubes(Color.green));
         }
         else
         {
-            int fallos = Mathf.Abs(totalRealesAsistieron - currentGuesses);
-            Debug.Log($"¡PERDISTE! Te equivocaste por {fallos}. Contaste {currentGuesses} alumnos pero vinieron {totalRealesAsistieron}.");
-            StartCoroutine(FlashCubes(Color.red)); // Parpadear Rojo
+            int misses = Mathf.Abs(totalActualAttended - currentGuesses);
+            Debug.Log($"YOU LOST! You missed by {misses}. You counted {currentGuesses} students but {totalActualAttended} attended.");
+            StartCoroutine(FlashCubes(Color.red));
         }
     }
 
-    // Efecto de parpadeo final
     IEnumerator FlashCubes(Color flashColor)
     {
-        for (int i = 0; i < 5; i++) // Parpadear 5 veces
+        for (int i = 0; i < 5; i++)
         {
             foreach (var student in students)
             {
@@ -143,7 +139,6 @@ public class AttendanceMiniGame : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
         
-        // Dejarlos encendidos de ese color al final
         foreach (var student in students)
         {
             student.GetComponent<Renderer>().material.color = flashColor;

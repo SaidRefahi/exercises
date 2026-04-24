@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class HealBeam : Ability
 {
-    public HealBeam(float amount) : base("Rayo Curativo", amount, TargetType.Aliado) { }
+    public HealBeam(float amount) : base("Heal Beam", amount, TargetType.Ally) { }
 
     public override void Execute(Entity target)
     {
-        // Validamos que se use en el target correcto leyendo la info del enum
         if (target.GetTargetType() == targetAllowed)
-            target.ModifyHealth(power); // Suma vida
+            target.ModifyHealth(power);
         else
-            Debug.LogWarning("¡No puedes curar a un enemigo!");
+            Debug.LogWarning("You cannot heal an enemy!");
     }
 }

@@ -4,7 +4,7 @@ public class EnemyObj : Entity
 {
     protected override void Start()
     {
-        myType = TargetType.Enemigo;
+        myType = TargetType.Enemy;
         base.Start();
     }
 
@@ -13,6 +13,5 @@ public class EnemyObj : Entity
         gameObject.SetActive(false);
     }
 
-    // Meta: Vida en 0
     public override bool IsGoalMet() => currentHealth <= 0;
 }

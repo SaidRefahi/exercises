@@ -14,7 +14,6 @@ namespace ThirdPersonController
         
         [Header("Camera Support")]
         [SerializeField] private GameObject lockOnCameraObject;
-        [Tooltip("An empty GameObject that the Cinemachine Camera looks at. This script will move it to the enemy.")]
         [SerializeField] private Transform lockOnLookAtPoint;
 
         public Transform CurrentTarget { get; private set; }
@@ -40,7 +39,6 @@ namespace ThirdPersonController
 
         private void Update()
         {
-            // Keep the LookAt point snapped to the enemy so Cinemachine can track it
             if (HasTarget && lockOnLookAtPoint != null)
             {
                 lockOnLookAtPoint.position = CurrentTarget.position;
@@ -65,7 +63,6 @@ namespace ThirdPersonController
             
             if (colliders.Length > 0)
             {
-                // Find closest
                 float closestDistance = Mathf.Infinity;
                 Transform closestTarget = null;
 

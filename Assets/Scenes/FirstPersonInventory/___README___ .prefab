@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6804517471593555015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5147523112254181787}
+  - component: {fileID: 6432905387181405678}
+  m_Layer: 0
+  m_Name: '___README___ '
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5147523112254181787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6804517471593555015}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.56043, y: -0, z: -1.40107}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6432905387181405678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6804517471593555015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2528d50a14eba0c4abfe3aafdf2a2b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Utilities.LevelReadme
+  levelName: First-Person Builder & Object Pooling
+  description: ' A first-person controller showcasing high-performance memory management
+    via native UnityEngine.Pool.ObjectPool. The scene implements an interface-driven
+    interaction system (IInteractable) and strict Zero GC rules. Players can pick
+    up cubes, storing them in a lightweight integer-based inventory, and dynamically
+    place them flush against surfaces using raycast normals to build custom platforms
+    or stairs.'
+  controls: 'WASD: Move
+
+    Space: Jump
+
+    Mouse: Look around
+
+    E: Interact
+    / Pick up cube
+
+    Left-Click: Place cube from inventory onto a targeted surface'

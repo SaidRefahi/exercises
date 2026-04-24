@@ -69,30 +69,24 @@ namespace ThirdPersonController
 
             if (direction.magnitude >= 0.1f)
             {
-                // Calculate target angle based on camera's rotation
                 float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + mainCamera.eulerAngles.y;
                 
-                // Handle Rotation
                 if (targetLock != null && targetLock.HasTarget)
                 {
-                    // If locked on, always face the target
                     Vector3 directionToTarget = (targetLock.CurrentTarget.position - transform.position).normalized;
                     directionToTarget.y = 0f;
                     transform.forward = directionToTarget;
                 }
                 else
                 {
-                    // If not locked on, smoothly rotate towards movement direction
                     float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                     transform.rotation = Quaternion.Euler(0f, angle, 0f);
                 }
 
-                // Return horizontal movement vector
                 return Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * speed;
             }
             else if (targetLock != null && targetLock.HasTarget)
             {
-                // Even if not moving, face the target when locked on
                 Vector3 directionToTarget = (targetLock.CurrentTarget.position - transform.position).normalized;
                 directionToTarget.y = 0f;
                 transform.forward = directionToTarget;
@@ -113,7 +107,7 @@ namespace ThirdPersonController
 
             if (isGrounded && velocity.y < 0)
             {
-                velocity.y = -2f; // Keep grounded safely
+                velocity.y = -2f;
             }
 
             if (jumpAction.action.WasPressedThisFrame() && isGrounded)
@@ -124,7 +118,6 @@ namespace ThirdPersonController
 
             velocity.y += gravity * Time.deltaTime;
             
-            // Combine horizontal and vertical movement
             Vector3 finalMove = horizontalMove + velocity;
             controller.Move(finalMove * Time.deltaTime);
         }

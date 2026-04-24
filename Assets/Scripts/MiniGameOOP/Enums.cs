@@ -1,2 +1,2 @@
-public enum TargetType { Aliado, Enemigo }
-public enum GameState { Jugando, Victoria, Derrota }
+public enum TargetType { Ally, Enemy }
+public enum GameState { Playing, Victory, Defeat }

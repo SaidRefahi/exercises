@@ -4,9 +4,9 @@ public class FriendObj : Entity
 {
     protected override void Start()
     {
-        myType = TargetType.Aliado;
+        myType = TargetType.Ally;
         base.Start();
-        currentHealth = 20f; // Empieza herido!
+        currentHealth = 20f;
     }
 
     public override void Die()
@@ -14,6 +14,5 @@ public class FriendObj : Entity
         gameObject.SetActive(false);
     }
 
-    // Meta: Vida llena
     public override bool IsGoalMet() => currentHealth >= maxHealth;
 }
