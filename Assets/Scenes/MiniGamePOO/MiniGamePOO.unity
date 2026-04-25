@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dd81c7c7590c88449da63998bb7958c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FriendObj
-  maxHealth: 100
+  maxHealth: 1000
 --- !u!135 &391919435
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae35724442caa534395824e0d5e40cca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyObj
-  maxHealth: 100
+  maxHealth: 1000
 --- !u!65 &1188801642
 BoxCollider:
   m_ObjectHideFlags: 0
